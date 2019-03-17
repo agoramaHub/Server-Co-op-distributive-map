@@ -2,9 +2,7 @@ const choo = require('choo')
 const html = require('choo/html')
 const main = require('../../view/main')
 
-// // Beaker Bowser DatArchive API...
-// const archive = new DatArchive(window.location)
-var xhr = new XMLHttpRequest()
+// API endpoint for retrieving node for map creation.
 var url = 'http://localhost:3001/status'
 
 // Initialise choo applications
@@ -12,8 +10,14 @@ const app = choo()
 
 app.use(function(state, emitter){
 
+  // Start state.node in false state. This prompts main.js (in view dir) to enact the
+  // while() loop to allow for !state/nodes to convert to state.nodes. Once process is
+  // done, on emitter.emit('render') passby while() and rtn true html architecture.
   state.nodes = false
 
+  // event listener. When the event 'get:node' is emitted by the main.js (located in view dir)
+  // initiate async call back function that assigns the var data the results of an awaited
+  // fetch() call. Rtn res var, then assign to state.node. render to view.
   emitter.on('get:nodes', async function(){
     var data = await fetch(url).then((res) => {
       if(!res.ok) {
@@ -32,22 +36,3 @@ app.use(function(state, emitter){
 
 app.route('/', main)
 app.mount('body')
-
-// var testcall = makeRequest(url)
-// setTimeout(() => {
-//   console.log(testcall)
-// }, 500)
-
-
-function makeRequest(url) {
-  console.log('bang 1!')
-  xhr.open('GET', url)
-  xhr.send()
-  xhr.onreadystatechange = function(state) {
-    if(!xhr.readyState === 4 && xhr.status === 200) {
-      console.log("Something has appeared to have gone wrong.")
-    } else {
-      return xhr.responseText
-    }
-  }
-}
