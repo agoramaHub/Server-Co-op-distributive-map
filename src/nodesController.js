@@ -1,22 +1,37 @@
 const mongoose = require('mongoose')
 const nodesSchema = require('./nodesModel')
 
-// Instantiate nodes model
+// Instantiate nodes model, which was imported (or required) through the nodesModel
+// which contains the boilerplate schema.
 const Nodes = mongoose.model('Nodes', nodesSchema)
 
-// model function...
+// POST API function. This function assigns a new Nodes obj with the server req for db insertion.
+// Currently, Nodes recieves req.body from API call. Once vetted it saves
+// the new entry into the db and returns res with json inputed into the db.
 function addnewNode(req, res) {
   let newNode = new Nodes(req.body)
-  if(!newNode) {
-    res.send('Object is undefined.')
-  }
-  newNode.save((err, data) => {
-    if (!err) {
-      res.json(data)
-      console.log('Entry successfully created')
-    } 
-  })
 
+  newNode.save((err, data) => {
+    if (err) {
+      res.send(err)
+    }
+    res.json(data)
+    console.log('Entry successfully created')
+  })
 }
 
-module.exports = addnewNode
+// GET end point function. This function is a basic GET req which search the db for all
+// nodes with a status of true. If this param is true return in json res. 
+function reqNodesMap(req, res) {
+  Nodes.find({"status": true}, (err, data) => {
+    if(err) {
+      res.send(err)
+    }
+    res.json(data)
+  })
+}
+
+module.exports = {
+    addnewNode,
+    reqNodesMap
+}
