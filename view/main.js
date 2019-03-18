@@ -28,19 +28,22 @@ module.exports = function(state, emit, i) {
       `
     }
 
-    // Loaded emit html render return
-        return html `
-        <body>
-          ${header(state)}
+      // Loaded emit html render return
+          return html `
+          <body>
+            ${header(state)}
 
-          <div class="container" id="drop_zone">
-              <div id="mover-container">
-                ${state.nodes.map(nodes)}
-              </div>
-          </div>
+            <div class="container" id="drop_zone">
+                <div id="mover-container">
+                  ${state.nodes.map(nodes)}
+                </div>
+            </div>
 
-          ${footer(state)}
-        </body>
-        `
+            ${footer(state)}
+          </body>
+          `
+
+
+
 
 }

@@ -34,5 +34,17 @@ app.use(function(state, emitter){
 
 })
 
+// in dev...
+app.use(function(state, emitter){
+  state.update = false
+
+  emitter.on('update', function(){
+    // state.update = true
+    // emitter.emit('render', location.reload())
+    console.log('New node added!')
+  })
+
+})
+
 app.route('/', main)
 app.mount('body')
