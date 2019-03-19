@@ -16,19 +16,36 @@ function animateMovable(movable) {
   var xMax = parentX - 100;
   var yMax = parentY - 100;
 
+  // movable.keyframes = [{
+  //   opacity: 0,
+  //   transform: "translate3d(" + (Math.random() * xMax) + "px, " + (Math.random() * yMax) + "px, 0px)"
+  // }, {
+  //   opacity: 1,
+  //   transform: "translate3d(" + (Math.random() * xMax) + "px, " + (Math.random() * yMax) + "px, 0px)"
+  // }, {
+  //   opacity: 0,
+  //   transform: "translate3d(" + (Math.random() * xMax) + "px, " + (Math.random() * yMax) + "px, 0px)"
+  // }];
+
   movable.keyframes = [{
     opacity: 0,
-    transform: "translate3d(" + (Math.random() * xMax) + "px, " + (Math.random() * yMax) + "px, 0px)"
+    transform: "translate3d(" + (Math.random() * xMax) + "px, " + (Math.random() * yMax) + "px, 0px)scale(3, 3)"
   }, {
     opacity: 1,
     transform: "translate3d(" + (Math.random() * xMax) + "px, " + (Math.random() * yMax) + "px, 0px)"
   }, {
     opacity: 0,
     transform: "translate3d(" + (Math.random() * xMax) + "px, " + (Math.random() * yMax) + "px, 0px)"
+  },{
+    opacity: 1,
+    transform: "translate3d(" + (Math.random() * xMax) + "px, " + (Math.random() * yMax) + "px, 0px)scale(.5, .5)"
+  },{
+    opacity: 0,
+    transform: "translate3d(" + (Math.random() * xMax) + "px, " + (Math.random() * yMax) + "px, 0px)"
   }];
 
   movable.animProps = {
-    duration: 1000 + Math.random() * 3000,
+    duration: 1000 + Math.random() * 20000,
     easing: "ease-out",
     iterations: 1
   }
