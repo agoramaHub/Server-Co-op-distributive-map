@@ -10,7 +10,7 @@ const PORT = 3001
 
 // Mongoose connection
 mongoose.Promise = global.Promise
-mongoose.connect('mongodb://127.0.0.1:27017/servermap', {useNewUrlParser: true}, (err, db) => {
+mongoose.connect('mongodb://yourlocaldb:port', {useNewUrlParser: true}, (err, db) => {
   console.log('Successful connection to DB')
   // db.close()
   // Still a question if this db.close() is needed. Seems to prevent db calls because of its position.
